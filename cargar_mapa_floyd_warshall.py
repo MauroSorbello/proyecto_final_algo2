@@ -17,12 +17,8 @@ def Floyd_Warshall(graph): #O(V^3)
 def leer__mapa(archivo):
     file = open(archivo, 'r')
     dic=dict()
-    dicFloydWarshal = dict()
     b=False
 
-    #for i in range(0, 2):
-        #if i == 1:
-            #newL = []
 
     file = open(archivo, 'r')
     ###loop para el conjunto de esquinas
@@ -48,10 +44,8 @@ def leer__mapa(archivo):
                     b=True 
                     break
                 #print("jjj")
-            #if i == 0:
             dic["".join(l)]=[]
-            #else:
-                #dicFloydWarshal["".join(l)]=
+            
         if b:
             break
         
@@ -67,7 +61,6 @@ def leer__mapa(archivo):
             else:
                 dictFW[elemento1][elemento2] = [0, elemento2]
     
-    #Creo el diccionario de adyacencia
     ###s {<e1,e2,c>,<e3,e4,c>, <e2,e1,c>
     ##ahora empieza a leer el conjunto de calles 
     while True:
