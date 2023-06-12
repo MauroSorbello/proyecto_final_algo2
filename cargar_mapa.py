@@ -66,7 +66,7 @@ def leer__mapa(archivo):
         if char=="}":
             break
 
-        if char=="(":
+        if char=="(" or char=="<":
             char = file.read(1)
             primer_e=[]
 
@@ -86,7 +86,7 @@ def leer__mapa(archivo):
             char=file.read(1)
 
             peso=0
-            while char!=")":
+            while char!=")" and char!=">":
                 ##print(char)
                 peso=peso*10+int(char)
                 char=file.read(1)
