@@ -346,7 +346,7 @@ def create_trip(persona,destino):
         print("no se encuentra la persona")
         return
 
-    L=los_autos_más_cercanos(persona,dicmovil,matriz)
+    L_cars=los_autos_más_cercanos(persona,dicmovil,matriz)
 
     
     ###significa que el destino es una ubicacion
@@ -378,7 +378,6 @@ def create_trip(persona,destino):
         if not des:
             print("la ubcicacion fija no se encuentra")
             return
-    
     
     camino=[math.inf,None,None]
     #print("-----",per)
@@ -426,7 +425,51 @@ def create_trip(persona,destino):
         current=matriz[current][camino[2]][1]
         #print("666",matriz[current][camino[2]][1])
     cam.append(camino[2])
-    print("ñÑÑÑÑÑn",cam)
+    print("Los autos disponibles son los siguientes:")
+    for i in range(0, len(L_cars)):
+        if L_cars[i][0] != None:
+            print(f"{i+1}) Auto: {L_cars[i][0]}")
+            print(f"   Monto: {L_cars[i][2]}")
+    print(f"El viaje para llegar a su destino es: {cam}")
+    accept = input("Desea aceptar el viaje S/N: ")
+    check2 = False
+    while check2 != True:
+        if accept.upper() == "S" or accept.upper() == "N":
+            check2 = True
+        else:
+            print("La letra ingresada es incorrecta, por favor seleccione S/N")
+            accept = input("Desea aceptar el viaje S/N: ")
+    if accept.upper() == "S":
+        auto = input("Por favor seleccione el numero del auto con el que desea viajar: ")
+        try: 
+            auto = int(auto)
+        except: ValueError
+        check = False
+
+        while check != True:
+            if auto == 1 or auto == 2 or auto == 3:
+                if L_cars[auto - 1][0] != None:
+                    check = True
+                else:
+                    check = False
+            if check == False:
+                print("El numero ingresado es incorrecto")
+                auto = input("Por favor seleccione el auto con el que desea viajar 1/2/3: ")
+            try:
+                auto = int(auto)
+            except: ValueError
+
+        name_auto = L_cars[auto - 1][0]
+        print(L_cars[auto - 1][2])
+        dicmovil[name_auto][1] =  des[0]
+        dicmovil[name_auto][2] =  des[1]
+        dicmovil[name_auto][3] =  des[2]
+        dicmovil[persona][0] = dicmovil[persona][0] - L_cars[auto - 1][2]
+        dicmovil[persona][1] =  des[0]
+        dicmovil[persona][2] =  des[1]
+        dicmovil[persona][3] =  des[2]
+        with open('dic_ubi_movil','wb') as g:
+            pickle.dump(dicmovil,g)
 
 
 def los_autos_más_cercanos(persona,dica,matriz):
@@ -458,25 +501,32 @@ def los_autos_más_cercanos(persona,dica,matriz):
                         pesoautos[auto]=matriz[dica[auto][3][0]][esq2][0]+dica[auto][3][1]+dica[persona][3][1]
                 
             else:
-                #print(auto)
                 if matriz[dica[auto][2][0]][esq1][0]<pesoautos[auto]:
                     pesoautos[auto]=(matriz[dica[auto][2][0]][esq1][0]+dica[auto][2][1]+dica[persona][2][1])
                 if dica[persona][0]:
                     if matriz[dica[auto][2][0]][esq2][0]<pesoautos[auto]:
                         pesoautos[auto]=(matriz[dica[auto][2][0]][esq2][0]+dica[auto][2][1]+dica[persona][3][1])
-    L=[[None,math.inf],[None,math.inf],[None,math.inf]]
-    #print(pesoautos)
+    L=[[None,math.inf,math.inf],[None,math.inf,math.inf],[None,math.inf,math.inf]]
     for autos in pesoautos:
-        #print(persona)
-        if ((pesoautos[autos]+dica[autos][0])/4)<dica[persona][0]:
+        costo = (pesoautos[autos]+dica[autos][0])/4
+        if (costo)<dica[persona][0]:
             if L[0][1]>pesoautos[autos]:
                 L.pop()
-                L.insert(0,[autos,pesoautos[autos]])
+                L.insert(0,[autos,pesoautos[autos],costo])
             elif L[1][1]>pesoautos[autos]:
                 L.pop()
-                L.insert(1,[autos,pesoautos[autos]])
+                L.insert(1,[autos,pesoautos[autos],costo])
             elif L[2][1]>pesoautos[autos]:
-                L[2]=[autos,pesoautos[autos]]
+                L[2]=[autos,pesoautos[autos],costo]
 
     return L
+
+
+
+(load_movil_element("P10","(e1,4) (e3,3)", 780))
+#(e1,e2,11)
+(load_movil_element("C8","(e1,7) (e2,4)", 400))
+(load_movil_element("C7","(e1,7) (e2,4)", 100))
+
+create_trip("P10","<e6,4> <e7,62>")
 
