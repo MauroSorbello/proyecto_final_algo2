@@ -1,5 +1,7 @@
 import math
 import pickle
+import argparse
+
 
 def Floyd_Warshall(graph): #O(V^3)
     #Añadir vertices 
@@ -550,3 +552,38 @@ def los_autos_más_cercanos(persona,dica,matriz):
 
     return L
 
+
+#Invocar funciones desde la consola
+parser = argparse.ArgumentParser()
+#nargs = cantidad de argumentos  
+#metavar = nombre de la variable
+#create_map(loca_path)            
+parser.add_argument("-create_map", nargs=1, metavar=("local_path"))
+#load_movil_element
+parser.add_argument("-load_movil_element", nargs=3, metavar=("nombre","direccion","monto"))
+#load_fix_element
+parser.add_argument("-load_fix_element", nargs=2, metavar=("nombre", "direccion"))
+#create_trip
+parser.add_argument("-create_trip", nargs=2, metavar=("persona","direccion"))
+
+#Cargamos los elementos
+#Creamos el mapa
+if parser.parse_args().create_map:
+    local_path = parser.parse_args().create_map[0]
+    create_map(local_path)
+#Cargamos movil element
+if parser.parse_args().load_movil_element:
+    nombre = parser.parse_args().load_movil_element[0]
+    direccion = parser.parse_args().load_movil_element[1]
+    monto = int(parser.parse_args().load_movil_element[2])
+    load_movil_element(nombre,direccion,monto)
+#Cargamos fix element
+if parser.parse_args().load_fix_element:
+    nombre = parser.parse_args().load_fix_element[0]
+    direccion = parser.parse_args().load_fix_element[1]
+    load_fix_element(nombre,direccion)
+#Creamos un viaje
+if parser.parse_args().create_trip:
+    nombre = parser.parse_args().create_trip[0]
+    direccion = parser.parse_args().create_trip[1]
+    create_trip(nombre,direccion)
