@@ -374,7 +374,7 @@ def create_trip(persona,destino):
             else:
                 des=[True,des[0],des[1]]
     else:
-        des=dicmovil.get(destino,False)
+        des=dicfijo.get(destino,False)
         if not des:
             print("la ubcicacion fija no se encuentra")
             return
