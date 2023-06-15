@@ -25,6 +25,12 @@ def Floyd_Warshall(graph): #O(V^3)
     #print(graph["e1"])
 
 def create_map(archivo):
+
+    if archivo[0]=="<" or archivo[0]=="(":
+        characters="<>()"
+        archivo = ''.join( x for x in archivo if x not in characters)
+    
+    
     file = open(archivo, 'r')
     dic=dict()
     b=False
