@@ -1,0 +1,18 @@
+from uber import *
+
+#create_map("Grafo_de_prueba.txt")
+#load_fix_element("H1",)
+###print( dicc)
+#load_fix_element( "H1", "<e8,7> <e10,7>")
+#load_fix_element ("A1", "<e7,8> <e5,8>")
+#load_fix_element ("H2", "<e3,3> <e4,3>")
+#load_movil_element ("P1" ,"<e1,5> <e2,6>", 2000)
+#load_movil_element ("C1" ,"<e11,5> <e6,6>", 200)
+#load_movil_element ("C2" ,"<e10,14> <e12,1>", 50)
+#load_movil_element ("C3" ,"<e9,7> <e8,8>", 110)
+#load_movil_element ("C4", "<e2,2> <e4,22>", 20)
+#load_movil_element ("C5", "<e6,43> <e7,23>", 25)
+#load_movil_element ("C6", "<e3,2> <e4,4>", 243)
+#load_movil_element ("C7", "<e6,43> <e7,24>", 131)
+#load_movil_element("C8", "<e7,43> <e10,24>",73)
+create_trip("P1","A1")
