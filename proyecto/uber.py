@@ -425,10 +425,11 @@ def create_trip(persona,destino):
         current=matriz[current][camino[2]][1]
         #print("666",matriz[current][camino[2]][1])
     cam.append(camino[2])
-    print("Los autos disponibles son los siguientes:")
-    if len(L_cars) == 0:
+    #Si no hay autos disponibles, ya sea porque no alcanza el dinero o porq no hay autos que lleguen
+    if (L_cars[0][0] == None) and (L_cars[1][0] == None) and (L_cars[2][0] == None):
         print("No hay autos disponibles")
         return False
+    print("Los autos disponibles son los siguientes:")
     for i in range(0, len(L_cars)):
         if L_cars[i][0] != None:
             print(f"{i+1}) Auto: {L_cars[i][0]}")
@@ -524,6 +525,3 @@ def los_autos_más_cercanos(persona,dica,matriz):
 
     return L
 
-
-
-load_fix_element("H1", "<e8,20> <e10,30>")
