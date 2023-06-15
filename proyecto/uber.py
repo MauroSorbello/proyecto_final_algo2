@@ -489,7 +489,7 @@ def los_autos_más_cercanos(persona,dica,matriz):
             ###la calle del auto es doble mano
             if dica[auto][1]:
                 if matriz[dica[auto][2][0]][esq1][0]<pesoautos[auto]:
-                    pesoautos[auto][0]=matriz[dica[auto][2][0]][esq1][0]+dica[auto][2][1]+dica[persona][2][1]
+                    pesoautos[auto]=matriz[dica[auto][2][0]][esq1][0]+dica[auto][2][1]+dica[persona][2][1]
                     
                 if matriz[dica[auto][3][0]][esq1][0]<pesoautos[auto]:
                     pesoautos[auto]=matriz[dica[auto][3][0]][esq1][0]+dica[auto][3][1]+dica[persona][2][1]
