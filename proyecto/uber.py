@@ -13,7 +13,7 @@ def Floyd_Warshall(graph): #O(V^3)
                     graph[elemento2][elemento3][0] = num 
                     graph[elemento2][elemento3][1] = elemento1
 
-def leer_mapa(archivo):
+def create_map(archivo):
     file = open(archivo, 'r')
     dic=dict()
     b=False
@@ -426,6 +426,9 @@ def create_trip(persona,destino):
         #print("666",matriz[current][camino[2]][1])
     cam.append(camino[2])
     print("Los autos disponibles son los siguientes:")
+    if len(L_cars) == 0:
+        print("No hay autos disponibles")
+        return False
     for i in range(0, len(L_cars)):
         if L_cars[i][0] != None:
             print(f"{i+1}) Auto: {L_cars[i][0]}")
@@ -523,4 +526,4 @@ def los_autos_más_cercanos(persona,dica,matriz):
 
 
 
-
+load_fix_element("H1", "<e8,20> <e10,30>")
