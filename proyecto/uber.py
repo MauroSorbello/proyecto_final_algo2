@@ -2,16 +2,25 @@ import math
 import pickle
 
 def Floyd_Warshall(graph): #O(V^3)
-    #Añadir vertices  
+    #Añadir vertices 
+    #print(graph["e1"])
     for elemento1 in graph:
         for elemento2 in graph:
             for elemento3 in graph:
+                
                 #Comparamos 
                 num = min(graph[elemento2][elemento3][0], graph[elemento2][elemento1][0] + graph[elemento1][elemento3][0])
                 if num < graph[elemento2][elemento3][0]:
+                    #if elemento2=="e1":
+                        #pass
+                        #print("------",elemento2,elemento3,elemento1,"----")
+                        #print("++++++++",graph[elemento2][elemento3][0], graph[elemento2][elemento1][0]+ graph[elemento1][elemento3][0],"++++++++")
+                        #print(graph[elemento2][elemento1][1])    
                     #Actualizamos la distancia y el vertice
                     graph[elemento2][elemento3][0] = num 
                     graph[elemento2][elemento3][1] = elemento1
+
+    #print(graph["e1"])
 
 def create_map(archivo):
     file = open(archivo, 'r')
@@ -327,6 +336,9 @@ def create_trip(persona,destino):
     with open('file','br') as f:
         map=pickle.load(f)
 
+
+    
+    #print(map)
     ##diccionario de las ubicaciones fijas
     with open('dic_ubi_movil','br') as g:
         dicmovil=pickle.load(g)
@@ -342,6 +354,7 @@ def create_trip(persona,destino):
     ##print(dicfijo)
     ##devuelve una lista de los tres autos mas cercanos
     per=dicmovil.get(persona,False)
+    #print(dicmovil)
     if not per:
         print("no se encuentra la persona")
         return
@@ -421,8 +434,20 @@ def create_trip(persona,destino):
     current=camino[1]
     cam=[]
     while current!=camino[2]:
+        #print("tttt",current)
+        #print("ñññ",matriz[current])
         cam.append(current)
+        antcurrent=current
         current=matriz[current][camino[2]][1]
+        #print("+++",search(map[antcurrent],current),antcurrent,current,"++++++")
+        if search(map[antcurrent],current)==False:
+            i=0
+            while antcurrent!=current:
+                if i !=0:
+                    cam.append(antcurrent)
+                antcurrent=matriz[antcurrent][current][1]
+                i+=1
+
         #print("666",matriz[current][camino[2]][1])
     cam.append(camino[2])
     #Si no hay autos disponibles, ya sea porque no alcanza el dinero o porq no hay autos que lleguen
