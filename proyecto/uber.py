@@ -523,10 +523,4 @@ def los_autos_más_cercanos(persona,dica,matriz):
 
 
 
-(load_movil_element("P10","(e1,4) (e3,3)", 780))
-#(e1,e2,11)
-(load_movil_element("C8","(e1,7) (e2,4)", 400))
-(load_movil_element("C7","(e1,7) (e2,4)", 100))
-
-create_trip("P10","<e6,4> <e7,62>")
 
